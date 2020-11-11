@@ -10,7 +10,7 @@
           <span class="created_at">created_at</span>
         </div>
         <h2 class="title">TitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitle</h2>
-        <router-link to="/detail">
+        <router-link :to="detailUrl">
           <span class="contents">contents contents contents contents contents contents contents contents contents contents contents contents contents contents contents contents contents </span>
         </router-link>
       </div>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+  import { url } from '@/router'
   export default {
     name: 'FeedItem',
     props: {
@@ -27,7 +28,13 @@
       created_at: String,
       title: String,
       content: String
-    }
+    },
+    computed: {
+      detailUrl(){
+        return url.detail(this.id)
+      }
+    },
+
   }
 </script>
 
