@@ -6,9 +6,11 @@
 
 <script>
 import router from './router'
+import store from './store'
 export default {
   name: 'App',
-  router
+  router,
+  store
 }
 </script>
 
