@@ -12,6 +12,7 @@
         <commercial-item v-for="commercial in commercials" :key="commercial.id"></commercial-item>
       </section>
     </div>
+    <filter-modal></filter-modal>
   </main>
 </template>
 
@@ -19,13 +20,15 @@
   import OptionBar from './20_OptionBar'
   import FeedItem from './30_FeedItem'
   import CommercialItem from './40_CommercialItem'
+  import FilterModal from './15_FilterModal'
 
   export default {
     name: "Feed",
     components: {
       'option-bar': OptionBar,
       'feed-item': FeedItem,
-      'commercial-item': CommercialItem
+      'commercial-item': CommercialItem,
+      'filter-modal': FilterModal
     },
     data(){
       return {
