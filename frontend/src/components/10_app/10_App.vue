@@ -19,6 +19,6 @@ export default {
 }
 </script>
 
-<style src="@/reset.css"></style>
+<style src="@/styles/_reset.css"></style>
 <style lang="scss" scoped>
 </style>
