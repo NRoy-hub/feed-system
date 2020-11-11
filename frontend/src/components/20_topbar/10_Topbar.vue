@@ -11,5 +11,8 @@
 </script>
 
 <style lang="scss" scoped>
-
+  .topbar{
+    height: 45px;
+    color: $unused;
+  }
 </style>
