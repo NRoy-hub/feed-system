@@ -6,15 +6,21 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import { requestApi } from '@/common'
 import router from '@/router'
 import store from '@/store'
 import Topbar from '@/components/20_topbar/10_Topbar'
+
 export default {
   name: 'App',
   router,
   store,
   components: {
     'top-bar': Topbar
+  },
+  created(){
+    Vue.prototype.$requestApi = requestApi
   }
 }
 </script>
