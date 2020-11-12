@@ -1,7 +1,13 @@
 #app{
   position: relative;
   width: 100vw;
-}
-.page{
-  width: 100%;
+
+  .page{
+    width: 100%;
+    @include flex_box(row, center);
+  }
+  .wrapper{
+    width: 100%;
+    max-width: $wrapper_max_width;
+  }
 }

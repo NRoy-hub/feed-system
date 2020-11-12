@@ -2,7 +2,7 @@
   box-sizing: border-box;
   padding: 20px 4%;
 
-  .detail{
+  .detail_wrapper{
     width: 100%;
     @include flex_box(column); 
 

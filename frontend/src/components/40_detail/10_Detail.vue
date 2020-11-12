@@ -1,6 +1,6 @@
 <template>
   <main class="detail-page page">
-    <div class="detail wrapper">
+    <div class="detail_wrapper wrapper">
       <section class="feed">
         <h2 class="title">Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title </h2>
         <p class="contents">contents contents contents contents contents contents contents contents contents contents contents </p>

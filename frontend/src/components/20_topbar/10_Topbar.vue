@@ -1,6 +1,8 @@
 <template>
   <header class="topbar">
-    <div class="info">[2020.11.13] 김태혁</div>
+    <div class="topbar_wrapper">
+      <div class="info">[2020.11.13] 김태혁</div>
+    </div>
   </header>
 </template>
 

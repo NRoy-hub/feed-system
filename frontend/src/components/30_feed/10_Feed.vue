@@ -1,16 +1,18 @@
 <template>
   <main class="feed-page page">
-    <aside class="aside_bar">
-      <div class="login_button">
-        <span>로그인</span>
+    <div class="feed_wrapper wrapper">
+      <aside class="aside_bar">
+        <div class="login_button">
+          <span>로그인</span>
+        </div>
+      </aside>
+      <div class="feed">
+        <option-bar></option-bar>
+        <section class="feed_list">
+          <feed-item v-for="feed in feeds" :key="feed.id"></feed-item>
+          <commercial-item v-for="commercial in commercials" :key="commercial.id"></commercial-item>
+        </section>
       </div>
-    </aside>
-    <div class="feed">
-      <option-bar></option-bar>
-      <section class="feed_list">
-        <feed-item v-for="feed in feeds" :key="feed.id"></feed-item>
-        <commercial-item v-for="commercial in commercials" :key="commercial.id"></commercial-item>
-      </section>
     </div>
     <filter-modal v-if="on_filter"></filter-modal>
   </main>
@@ -41,5 +43,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/30_feed/10_Feed.scss';
+    @import '@/styles/30_feed/10_Feed.scss';
 </style>
