@@ -1,0 +1,38 @@
+.feed-page{
+  min-height: calc(100vh - 45px);
+  display: flex;
+
+  .aside_bar{
+    padding-right: 40px;
+    display: none;
+
+    .login_button{
+      @include size(235px, 60px);
+      border-radius: 5px;
+      background-color: $custom_green;
+      @include flex_box(row, center, center);
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+
+  .feed{
+    width: 100%;
+    flex: 1;
+    @include flex_box(column);
+    .feed_list{
+      flex: 1;
+      @include flex_box(column);
+      gap: 10px;
+      padding-bottom: 10px;
+      background: #f4f5f7;
+
+      & > *{
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
+        background: white;
+      }
+    }
+  }
+}

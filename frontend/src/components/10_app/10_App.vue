@@ -20,11 +20,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #app{
-    position: relative;
-    width: 100vw;
-  }
-  .page{
-    width: 100%;
-  }
+  @import '@/styles/10_app/10_App.scss';
 </style>

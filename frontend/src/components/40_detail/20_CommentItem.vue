@@ -22,30 +22,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .comment{
-    padding: 20px 0;
-    border: 1px solid $border_color;
-    border-width: 1px 0 1px;
-    &:not(:first-child){
-      margin-top: 30px;
-    }
-
-    header{
-      padding-bottom: 10px;
-      border-bottom: 1px solid $border_color;
-      line-height: 25px;
-      color: $name_color;
-    }
-    .contents{
-      margin-top: 15px;
-      line-height: 25px;
-      color: $contents_color;
-    }
-    .created_at{
-      margin-top: 25px;
-      line-height: 20px;
-      color: $unused_color;
-      font-size: 13px;
-    }
-  }
+  @import '@/styles/40_detail/20_CommentItem.scss';
 </style>

@@ -11,17 +11,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .topbar{
-    box-sizing: border-box;
-    width: 100%;
-    height: 45px;
-    padding: 0 4%;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.07);
-
-    .info{
-      padding-top: 16px;
-      line-height: 25px;
-      color: #212529;
-    }
-  }
+  @import '@/styles/20_topbar/10_Topbar.scss';
 </style>
