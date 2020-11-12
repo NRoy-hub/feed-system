@@ -19,6 +19,7 @@ export default {
 }
 </script>
 
+<style src="@/styles/reset.css"></style>
 <style lang="scss" scoped>
   @import '@/styles/10_app/10_App.scss';
 </style>
