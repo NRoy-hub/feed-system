@@ -19,7 +19,6 @@ export default {
 }
 </script>
 
-<style src="@/styles/_reset.css"></style>
 <style lang="scss" scoped>
   #app{
     position: relative;
