@@ -52,7 +52,7 @@
       @include flex_box(row, space-between);
       line-height: 20px;
       font-size: 13px;
-      .category{ color: $id_color; }
+      .category{ color: $name_color; }
       .content_id{ color: $unused_color; }
     }
 
