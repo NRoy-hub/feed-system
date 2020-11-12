@@ -8,7 +8,7 @@
         <span>내림차순</span>
       </div>
     </div>
-    <div class="filter_button">
+    <div class="filter_button" @click="$emit('open-filter')">
       <span>필터</span>
     </div>
   </header>
@@ -16,7 +16,7 @@
 
 <script>
   export default {
-    
+    name: 'OptionBar'
   }
 </script>
 

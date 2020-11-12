@@ -7,14 +7,14 @@
         </div>
       </aside>
       <div class="feed">
-        <option-bar></option-bar>
+        <option-bar @open-filter="toggleFilter(true)"></option-bar>
         <section class="feed_list">
           <feed-item v-for="feed in feeds" :key="feed.id"></feed-item>
           <commercial-item v-for="commercial in commercials" :key="commercial.id"></commercial-item>
         </section>
       </div>
     </div>
-    <filter-modal v-if="on_filter"></filter-modal>
+    <filter-modal v-if="open_filter" @close-filter="toggleFilter(false)"></filter-modal>
   </main>
 </template>
 
@@ -36,7 +36,12 @@
       return {
         feeds: [{ id: 'feed-01' }],
         commercials: [{ id: 'ad-01' }],
-        on_filter: false
+        open_filter: false
+      }
+    },
+    methods: {
+      toggleFilter(next){
+        this.open_filter = next;
       }
     }
   }

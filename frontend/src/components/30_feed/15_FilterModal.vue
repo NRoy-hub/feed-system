@@ -10,16 +10,16 @@
           <span class="checkmark"></span>
         </label>
         <label class="custom_checkbox">category_name
-          <input type="checkbox">
+          <input type="checkbox" checked>
           <span class="checkmark"></span>
         </label>
         <label class="custom_checkbox">category_name
-          <input type="checkbox">
+          <input type="checkbox" checked>
           <span class="checkmark"></span>
         </label>
       </div>
       <button>저장하기</button>
-      <div class="cancel_button">
+      <div class="cancel_button" @click="$emit('close-filter')">
         <img src="@/assets/close.png" alt="clonse_icon">
       </div>
     </form>
