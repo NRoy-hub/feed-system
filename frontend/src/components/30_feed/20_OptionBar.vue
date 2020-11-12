@@ -25,7 +25,7 @@
     height: 44px;
     padding: 0 4%;
     border-bottom: 1px solid $border_color;
-    @include flex-box(row, space-between);
+    @include flex-box(row, space-between, flex-start);
     font-size: 13px;
     color: $unused_color;
 

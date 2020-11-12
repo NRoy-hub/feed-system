@@ -1,5 +1,5 @@
 <template>
-  <main class="feed-page">
+  <main class="feed-page page">
     <aside class="aside_bar">
       <div class="login_button">
         <span>로그인</span>
@@ -41,7 +41,7 @@
 
 <style lang="scss" scoped>
   .feed-page{
-    width: 100%;
+    min-height: calc(100vh - 45px);
     display: flex;
 
     .aside_bar{
@@ -61,9 +61,20 @@
     }
 
     .feed{
+      width: 100%;
       flex: 1;
+      @include flex-box(column);
       .feed_list{
+        flex: 1;
         @include flex-box(column);
+        gap: 10px;
+        padding-bottom: 10px;
+        background: #f4f5f7;
+
+        & > *{
+          box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
+          background: white;
+        }
       }
     }
   }

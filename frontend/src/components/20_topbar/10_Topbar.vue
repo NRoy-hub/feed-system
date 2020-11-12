@@ -12,6 +12,7 @@
 
 <style lang="scss" scoped>
   .topbar{
+    box-sizing: border-box;
     width: 100%;
     height: 45px;
     padding: 0 4%;

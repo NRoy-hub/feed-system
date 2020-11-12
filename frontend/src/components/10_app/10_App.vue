@@ -21,4 +21,11 @@ export default {
 
 <style src="@/styles/_reset.css"></style>
 <style lang="scss" scoped>
+  #app{
+    position: relative;
+    width: 100vw;
+  }
+  .page{
+    width: 100%;
+  }
 </style>
