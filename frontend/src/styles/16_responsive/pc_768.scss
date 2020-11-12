@@ -60,5 +60,21 @@
         }
       }
     }
+
+    // detail
+    .detail-page{
+      padding: 50px 0 30px;
+
+      .feed{
+        padding: 20px 30px;
+        border: 1px solid $custom_green;
+        border-radius: 5px;
+      }
+      .comment{
+        padding: 20px 30px;
+        border: 1px solid $border_color;
+        border-radius: 5px;
+      }
+    }
   }
 }
