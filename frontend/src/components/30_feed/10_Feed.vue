@@ -53,7 +53,7 @@
         @include size(235px, 60px);
         border-radius: 5px;
         background-color: $custom_green;
-        @include flex-box(row, center, center);
+        @include flex_box(row, center, center);
         color: white;
         font-size: 22px;
         font-weight: bold;
@@ -64,10 +64,10 @@
     .feed{
       width: 100%;
       flex: 1;
-      @include flex-box(column);
+      @include flex_box(column);
       .feed_list{
         flex: 1;
-        @include flex-box(column);
+        @include flex_box(column);
         gap: 10px;
         padding-bottom: 10px;
         background: #f4f5f7;

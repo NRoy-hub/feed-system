@@ -40,7 +40,7 @@
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.7);
-    @include flex-box(row, center, center);
+    @include flex_box(row, center, center);
 
     .modal_form{
       position: relative;

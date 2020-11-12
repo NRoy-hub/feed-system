@@ -49,7 +49,7 @@
     header{
       padding-bottom: 11px;
       border-bottom: 1px solid $border_color;
-      @include flex-box(row, space-between);
+      @include flex_box(row, space-between);
       font-size: 13px;
       .category{ color: $id_color; }
       .content_id{ color: $unused_color; }

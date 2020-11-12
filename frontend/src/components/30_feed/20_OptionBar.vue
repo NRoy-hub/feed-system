@@ -25,7 +25,7 @@
     height: 44px;
     padding: 0 4%;
     border-bottom: 1px solid $border_color;
-    @include flex-box(row, space-between, flex-start);
+    @include flex_box(row, space-between, flex-start);
     font-size: 13px;
     color: $unused_color;
 
@@ -34,7 +34,7 @@
       display: flex;
 
       .order{
-        @include flex-box(row, flex-start, center);
+        @include flex_box(row, flex-start, center);
         margin-right: 13px;
         cursor: pointer;
         &::before{
