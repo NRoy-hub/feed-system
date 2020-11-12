@@ -42,14 +42,15 @@
   .feed_item{
     width: 100%;
     box-sizing: border-box;
-    padding: 26px 4% 21px 4%;
+    padding: 20px 4%;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
     background: white;
 
     header{
-      padding-bottom: 11px;
+      padding-bottom: 10px;
       border-bottom: 1px solid $border_color;
       @include flex_box(row, space-between);
+      line-height: 20px;
       font-size: 13px;
       .category{ color: $id_color; }
       .content_id{ color: $unused_color; }
@@ -60,6 +61,7 @@
       
       .user_id{
         font-size: 13px;
+        line-height: 20px;
         color: $custom_green;
       }
       .created_at{
@@ -73,16 +75,18 @@
     }
 
     .title{
-      margin-top: 24px;
+      margin-top: 15px;
       @include ellipsis(100%);
+      line-height: 28px;
       font-size: 18px;
       font-weight: bold;
       color: $title_color;
     }
     .contents{
-      margin-top: 15px;
+      margin-top: 5px;
       display: block;
       @include ellipsis(100%);
+      line-height: 25px;
       color: $contents_color;
     }
 

@@ -58,7 +58,7 @@
         @include ellipsis(100%);
       }
       .contents{
-        margin-top: 15px;
+        margin-top: 5px;
         line-height: 1.56;
         color: $contents_color; 
         @include ellipsis(100%);
