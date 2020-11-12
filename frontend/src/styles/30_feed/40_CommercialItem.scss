@@ -1,14 +1,14 @@
 .commercial_item{
-  padding: 25px 4% 21px;
   
   .sponsored{
     font-size: 13px;
+    line-height: 20px;
     color: $unused_color;
   }
   .commercial_container{
+    margin-top: 15.5px;
     figure{
       position: relative;
-      margin-top: 17.5px;
       width: 100%;
       padding-bottom: 52%;
       background: #f4f5f7;
@@ -19,19 +19,22 @@
         object-fit: cover;
       }
     }
-    .title{
-      margin-top: 23.5px;
-      line-height: 1.56;
-      font-size: 18px;
-      color: $title_color;
-      font-weight: bold;
-      @include ellipsis(100%);
-    }
-    .contents{
-      margin-top: 5px;
-      line-height: 1.56;
-      color: $contents_color; 
-      @include ellipsis(100%);
+    .content_container{
+      width: 100%;
+      .title{
+        margin-top: 23.5px;
+        line-height: 28px;
+        font-size: 18px;
+        color: $title_color;
+        font-weight: bold;
+        @include ellipsis(100%);
+      }
+      .contents{
+        margin-top: 5px;
+        line-height: 25px;
+        color: $contents_color; 
+        @include ellipsis(100%);
+      }
     }
   }
 }

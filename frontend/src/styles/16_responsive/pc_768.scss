@@ -1,0 +1,57 @@
+@media only screen and (min-width: 769px){
+  // feed page
+  .feed-page .feed_wrapper {
+    padding-top: 50px;
+    min-height: initial;
+    .aside_bar{
+      display: block;
+    }
+    .feed{
+      .option_bar{
+        border: none;
+        padding: 0;
+
+        .order_buttons{
+          margin-top: 5px;
+        }
+        .filter_button{
+          margin: 0;
+        }
+      }
+      .feed_list{
+        gap: 30px;
+        background: white;
+
+        & > *{
+          padding: 20px 30px;
+          border: 1px solid $border_color;
+          border-radius: 5px;
+          box-shadow: none;
+        }
+        .feed_item .created_at{
+          display: inline-block;
+        }
+        .commercial_item .commercial_container{
+          display: flex;
+
+          figure{
+            width: 310px;
+            padding-bottom: 179px;
+            flex-shrink: 0;
+
+            img{
+              position: initial;
+            }
+          }
+          .content_container{
+            margin-left: 29.5px;
+            @include ellipsis(100%);
+
+            .title{ margin-top: 0; }
+            .contents{ margin-top: 10px; }
+          }
+        }
+      }
+    }
+  }
+}

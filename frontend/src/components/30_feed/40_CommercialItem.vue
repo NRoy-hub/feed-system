@@ -11,7 +11,6 @@
         <div class="content_container">
           <div class="title">Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title</div>
           <p class="contents">content content content content content content content content content content content content content content content content content content content content content content content </p>
-      
         </div>
       </div>
     </a>
