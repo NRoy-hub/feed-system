@@ -14,7 +14,7 @@
   .topbar{
     width: 100%;
     height: 45px;
-    padding: 0 15px;
+    padding: 0 4%;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.07);
 
     .info{

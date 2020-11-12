@@ -35,5 +35,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+  .filter_modal{
+    display: none;
+  }
 </style>

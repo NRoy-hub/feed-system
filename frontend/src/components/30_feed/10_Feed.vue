@@ -40,5 +40,31 @@
 </script>
 
 <style lang="scss" scoped>
+  .feed-page{
+    width: 100%;
+    display: flex;
 
+    .aside_bar{
+      padding-right: 40px;
+      display: none;
+
+      .login_button{
+        @include size(235px, 60px);
+        border-radius: 5px;
+        background-color: $custom_green;
+        @include flex-box(row, center, center);
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+
+    .feed{
+      flex: 1;
+      .feed_list{
+        @include flex-box(column);
+      }
+    }
+  }
 </style>
