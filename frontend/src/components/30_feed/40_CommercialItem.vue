@@ -28,5 +28,41 @@
 </script>
 
 <style lang="scss" scoped>
+  .commercial_item{
+    padding: 25px 15px 21px;
+    
+    .sponsored{
+      font-size: 13px;
+      color: $unused_color;
+    }
+    .commercial_container{
+      figure{
+        position: relative;
+        margin-top: 17.5px;
+        width: 100%;
+        padding-bottom: 52%;
+        background: #f4f5f7;
 
+        img{ 
+          position: absolute;
+          @include size(100%, 100%);
+          object-fit: cover;
+        }
+      }
+      .title{
+        margin-top: 23.5px;
+        line-height: 1.56;
+        font-size: 18px;
+        color: $title_color;
+        font-weight: bold;
+        @include ellipsis(100%);
+      }
+      .contents{
+        margin-top: 15px;
+        line-height: 1.56;
+        color: $contents_color; 
+        @include ellipsis(100%);
+      }
+    }
+  }
 </style>
