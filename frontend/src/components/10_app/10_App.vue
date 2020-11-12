@@ -23,5 +23,5 @@ export default {
 <style lang="scss">
   @import '@/styles/10_app/10_App.scss';
   @import '@/styles/16_responsive/pc_768.scss';
-  @import '@/styles/16_responsive/pc_1060.scss';
+  @import '@/styles/16_responsive/pc_1160.scss';
 </style>
