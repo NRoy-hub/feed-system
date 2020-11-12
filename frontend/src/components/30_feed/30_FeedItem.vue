@@ -10,7 +10,7 @@
         <span class="created_at">created_at</span>
       </div>
       <h2 class="title">TitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitle</h2>
-      <router-link :to="detailUrl">
+      <router-link :to="detail_url">
         <span class="contents">contents contents contents contents contents contents contents contents contents contents contents contents contents contents contents contents contents </span>
       </router-link>
     </div>
@@ -30,7 +30,7 @@
       content: String
     },
     computed: {
-      detailUrl(){
+      detail_url(){
         return url.detail(this.id)
       }
     },

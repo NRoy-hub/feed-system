@@ -3,6 +3,10 @@
     // topbar
     .topbar{
       height: 70px;
+      .topbar_wrapper.can_back{
+        .info{ display: block; }
+        .back{ display: none; }
+      }
       .info{ margin-top: 28px; }
     }
     // feed page
