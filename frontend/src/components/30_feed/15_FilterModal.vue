@@ -4,38 +4,86 @@
       <header>
         <h3>필터</h3>
       </header>
-      <ul class="categories">
-        <li>
+      <div class="categories">
+        <label class="custom_checkbox">category_name
+          <input type="checkbox" checked>
+          <span class="checkmark"></span>
+        </label>
+        <label class="custom_checkbox">category_name
           <input type="checkbox">
-          <span>category_name</span>
-        </li>
-        <li>
+          <span class="checkmark"></span>
+        </label>
+        <label class="custom_checkbox">category_name
           <input type="checkbox">
-          <span>category_name</span>
-        </li>
-        <li>
-          <input type="checkbox">
-          <span>category_name</span>
-        </li>
-      </ul>
+          <span class="checkmark"></span>
+        </label>
+      </div>
       <button>저장하기</button>
-      <cancel-button></cancel-button>
+      <div class="cancel_button">
+        <img src="@/assets/close.png" alt="clonse_icon">
+      </div>
     </form>
   </div>
 </template>
 
 <script>
-  import CancelButton from '@/components/10_app/20_CancelButton'
   export default {
-    name: 'FilterModal',
-    components: {
-      'cancel-button': CancelButton
-    }
+    name: 'FilterModal'
   }
 </script>
 
 <style lang="scss" scoped>
   .filter_modal{
-    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    @include flex-box(row, center, center);
+
+    .modal_form{
+      position: relative;
+      box-sizing: border-box;
+      width: 89.8%;
+      max-width: 460px;
+      height: 268px;
+      padding: 31px 30px 30px 30px;
+      background: white;
+
+      header{
+        font-size: 22px;
+        font-weight: bold;
+        line-height: 32px;
+        color: #212529;
+      }
+      .categories{
+        @include flex_box(column, null, flex-start);
+        
+        label{
+          @include custom_checkbox();
+          color: #495057;
+            margin-top: 10px;
+        }
+      }
+      button{
+        width: 100%;
+        margin-top: 30px;
+        padding: 13px 0 8px;
+        background: $custom_green;
+        outline: none;
+        border: none;
+        border-radius: 3px;
+        color: white;
+        line-height: 19px;
+        cursor: pointer;
+      }
+      .cancel_button{
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        cursor: pointer;
+      }
+    }
   }
 </style>

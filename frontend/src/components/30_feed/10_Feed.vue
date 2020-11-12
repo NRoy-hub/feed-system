@@ -12,7 +12,7 @@
         <commercial-item v-for="commercial in commercials" :key="commercial.id"></commercial-item>
       </section>
     </div>
-    <filter-modal></filter-modal>
+    <filter-modal v-if="on_filter"></filter-modal>
   </main>
 </template>
 
@@ -33,7 +33,8 @@
     data(){
       return {
         feeds: [{ id: 'feed-01' }],
-        commercials: [{ id: 'ad-01' }]
+        commercials: [{ id: 'ad-01' }],
+        on_filter: false
       }
     }
   }
