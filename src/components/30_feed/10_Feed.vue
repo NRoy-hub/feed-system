@@ -9,8 +9,17 @@
       <div class="feed">
         <option-bar @open-filter="toggleFilter(true)" :order.sync="order"></option-bar>
         <section class="feed_list">
-          <feed-item v-for="feed in feeds" :key="feed.id" v-bind="feed"></feed-item>
-          <commercial-item v-for="commercial in commercials" :key="commercial.id"></commercial-item>
+          <feed-item 
+            v-for="(feed, index) in feeds" 
+            :key="`feed_${ feed.id }`"
+            :style="{ order: Math.floor(index / cycle) }"
+            v-bind="feed"
+          ></feed-item>
+          <commercial-item 
+            v-for="(commercial, index) in showCommercials"
+            :style="{ order: index }"
+            :key="`commercial_${ commercial.id }`"
+          ></commercial-item>
         </section>
       </div>
     </div>
@@ -38,29 +47,53 @@
     },
     data(){
       return {
-        page: 1,
+        feedPage: 1,
+        commercialPage: 1,
         order: 'asc',
         feeds: [],
         commercials: [],
         openFilter: false,
         filterCategory: [],
-        end: false
+        end: false,
+        cycle: 4
       }
     },
     watch: {
       filterCategory(){
-        this.page = 1
+        this.feedPage = 1
         this.end = false
         this.updateFeeds(data => {
           this.feeds = data
         })
       },
       order(){
-        this.page = 1
+        this.feedPage = 1
         this.end = false
         this.updateFeeds(data => {
           this.feeds = data
         })
+      },
+      feeds(){
+        if(this.commercials.length < Math.floor(this.feeds.length / this.cycle)){
+          const limit = 5
+          this.$requestApi({
+            method: 'get',
+            path: '/api/ads',
+            params: { page: this.commercialPage, limit },
+            success: (res) => {
+              this.commercials = [...this.commercials, ...res.data]
+              this.commercialPage = 
+                (res.current_page === res.last_page) ? 1 : this.commercialPage + 1
+            }
+          })
+        }
+      }
+    },
+    computed: {
+      showCommercials(){
+        const base = Math.floor(this.feeds.length / this.cycle)
+        const length = this.feeds.length % this.cycle === 0 ? base - 1 : base;
+        return [...this.commercials].splice(0, length)
       }
     },
     methods: {
@@ -76,7 +109,7 @@
       toggleFilter(next){ this.openFilter = next },      
       updateFilter(next){ this.filterCategory = next },
       updateFeeds(cb){
-        const { filterCategory: category, order: ord, $store: store, page } = this
+        const { filterCategory: category, order: ord, $store: store, feedPage: page } = this
         if(store.state.loading)return
 
         this.$store.commit('load_on')
@@ -91,7 +124,7 @@
             if(res.current_page === res.last_page){
               this.end = true
             }
-            this.page += 1
+            this.feedPage += 1
             cb(res.data)
           },
           common: () => store.commit('load_off')
