@@ -14,7 +14,11 @@
         </section>
       </div>
     </div>
-    <filter-modal v-if="openFilter" @close-filter="toggleFilter(false)"></filter-modal>
+    <filter-modal 
+      v-if="openFilter" 
+      @close-filter="toggleFilter(false)"
+      :filter_category.sync="filterCategory"
+    ></filter-modal>
   </main>
 </template>
 
@@ -36,32 +40,16 @@
       return {
         feeds: [],
         commercials: [],
-        openFilter: false
+        openFilter: false,
+        filterCategory: []
       }
     },
-    methods: {
-      toggleFilter(next){
-        this.openFilter = next;
-      }
-    },
-    created(){
-      (async function(vm){
-        const store = vm.$store
-        store.commit('load_on')
-        // * get category
-        await vm.$requestApi({
-          method: 'get',
-          path: '/api/category',
-          success: ({ category }) => {
-            store.commit('set_category', { category })
-          }
-        })
-        if(store.state.category.length === 0){
-          return store.commit('load_off')
-        }
+    watch: {
+      filterCategory(){
+        const category = this.filterCategory
         // * get list
-        const category = store.state.category.map(({ id }) => id)
-        await vm.$requestApi({
+        this.$store.commit('load_on')
+        this.$requestApi({
           method: 'get',
           path: '/api/list',
           params: {
@@ -70,14 +58,28 @@
             limit: 10,
             category
           },
-          success: (res) => {
-            vm.feeds = res.data
-          },
-          common(){
-            store.commit('load_off')
-          }
+          success: (res) => this.feeds = res.data,
+          common: () => this.$store.commit('load_off')
         })
-      })(this);
+      }
+    },
+    methods: {
+      toggleFilter(next){ this.openFilter = next },      
+      updateFilter(next){ this.filterCategory = next }
+    },
+    created(){
+      const store = this.$store
+      // * get category
+      store.commit('load_on')
+      this.$requestApi({
+        method: 'get',
+        path: '/api/category',
+        success: ({ category }) => {
+          store.commit('set_category', { category })
+          this.filterCategory = category.map(item => item.id)
+        },
+        common: () => store.commit('load_off')
+      })
     }
   }
 </script>

@@ -1,13 +1,13 @@
 <template>
   <div class="filter_modal">
-    <form class="modal_form">
+    <form class="modal_form" @submit.prevent="onSubmit">
       <header>
         <h3>필터</h3>
       </header>
       <div class="categories">
         <label class="custom_checkbox" v-for="category in categories" :key="category.id">
           {{ category.name }}
-          <input type="checkbox" checked>
+          <input type="checkbox" :name="category.id" :checked="filter_category.includes(category.id)">
           <span class="checkmark"></span>
         </label>
       </div>
@@ -22,9 +22,23 @@
 <script>
   export default {
     name: 'FilterModal',
+    props: {
+      filter_category: Array
+    },
     computed: {
       categories(){
         return this.$store.state.category
+      }
+    },
+    methods: {
+      onSubmit(e){
+        const result = []
+        const data = new FormData(e.target)
+        this.categories.forEach(({ id }) => data.get(id) && result.push(id))
+        if(result.length === 0)return alert('카테고리를 선택하지 않았습니다.')
+        
+        this.$emit('update:filter_category', result)
+        this.$emit('close-filter')
       }
     }
   }
