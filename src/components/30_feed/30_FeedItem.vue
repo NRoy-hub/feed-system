@@ -7,7 +7,7 @@
     <div class="feed_container">
       <div>
         <span class="user_id">{{ user_id }}</span>
-        <span class="created_at">created_at</span>
+        <span class="created_at">{{ formattedDate }}</span>
       </div>
       <h2 class="title">{{ title }}</h2>
       <router-link :to="detailUrl">
@@ -37,6 +37,9 @@
         const { category } = this.$store.state
         const index = category.map(({ id }) => id).indexOf(this.category_id)
         return index !== -1 ? category[index].name : '카테고리명'
+      },
+      formattedDate(){
+        return this.$formatDate(this.created_at)
       }
     },
 

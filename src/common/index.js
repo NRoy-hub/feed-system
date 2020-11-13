@@ -25,3 +25,13 @@ export const requestApi = async ({ path, method = 'get', data = {}, params={}, s
   }
 
 }
+
+export const formatDate = (str) => {
+  const date = new Date(str)
+  const year = date.getFullYear()
+  const month = date.getMonth()
+  const day = date.getDate()
+
+  return `${ year }-${ month }-${ day < 10 ? '0' : '' }${ day }`
+
+}

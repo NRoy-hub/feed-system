@@ -8,7 +8,7 @@
 
 <script>
 import Vue from 'vue'
-import { requestApi } from '@/common'
+import { requestApi, formatDate } from '@/common'
 import router from '@/router'
 import store from '@/store'
 import Topbar from '@/components/20_topbar/10_Topbar'
@@ -24,6 +24,7 @@ export default {
   },
   created(){
     Vue.prototype.$requestApi = requestApi
+    Vue.prototype.$formatDate = formatDate
   }
 }
 </script>
