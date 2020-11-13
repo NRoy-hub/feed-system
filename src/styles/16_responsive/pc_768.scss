@@ -45,20 +45,20 @@
             display: flex;
   
             figure{
-              width: 310px;
-              padding-bottom: 179px;
               flex-shrink: 0;
-  
               img{
-                position: initial;
+                @include size(310px, 179px);
+                object-fit: scale-down;
               }
             }
             .content_container{
               margin-left: 29.5px;
-              @include ellipsis(100%);
   
               .title{ margin-top: 0; }
-              .contents{ margin-top: 10px; }
+              .contents{ 
+                margin-top: 10px; 
+                max-height: 100px;
+              }
             }
           }
         }

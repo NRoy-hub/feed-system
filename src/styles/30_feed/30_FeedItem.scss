@@ -34,8 +34,7 @@
 
   .title{
     margin-top: 15px;
-    @include ellipsis(100%);
-    line-height: 28px;
+    @include ellipsis_multiple(100%, 28px, 28px);
     font-size: 18px;
     font-weight: bold;
     color: $title_color;
@@ -43,8 +42,7 @@
   .contents{
     margin-top: 5px;
     display: block;
-    @include ellipsis(100%);
-    line-height: 25px;
+    @include ellipsis_multiple(100%, 25px, 25px);
     color: $contents_color;
   }
 
