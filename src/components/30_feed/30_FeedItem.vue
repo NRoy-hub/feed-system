@@ -1,17 +1,17 @@
 <template>
   <article class="feed_item">
     <header>
-      <div class="category">category_name</div>
-      <div class="content_id">content_id</div>
+      <div class="category">{{ categoryName }}</div>
+      <div class="content_id">{{ id }}</div>
     </header>
     <div class="feed_container">
       <div>
-        <span class="user_id">user_id</span>
+        <span class="user_id">{{ user_id }}</span>
         <span class="created_at">created_at</span>
       </div>
-      <h2 class="title">TitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitle</h2>
-      <router-link :to="detail_url">
-        <span class="contents">contents contents contents contents contents contents contents contents contents contents contents contents contents contents contents contents contents </span>
+      <h2 class="title">{{ title }}</h2>
+      <router-link :to="detailUrl">
+        <span class="contents">{{ contents }}</span>
       </router-link>
     </div>
   </article>
@@ -22,16 +22,21 @@
   export default {
     name: 'FeedItem',
     props: {
-      id: String,
-      category_name: String,
-      user_id: String,
+      id: Number,
+      category_id: Number,
+      user_id: Number,
       created_at: String,
       title: String,
-      content: String
+      contents: String
     },
     computed: {
-      detail_url(){
+      detailUrl(){
         return url.detail(this.id)
+      },
+      categoryName(){
+        const { category } = this.$store.state
+        const index = category.map(({ id }) => id).indexOf(this.category_id)
+        return index !== -1 ? category[index].name : '카테고리명'
       }
     },
 

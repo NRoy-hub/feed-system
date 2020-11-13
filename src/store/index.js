@@ -5,7 +5,8 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-  loading: false
+  loading: false,
+  category: []
 }
 
 export default new Vuex.Store({

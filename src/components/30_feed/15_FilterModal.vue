@@ -5,15 +5,8 @@
         <h3>필터</h3>
       </header>
       <div class="categories">
-        <label class="custom_checkbox">category_name
-          <input type="checkbox" checked>
-          <span class="checkmark"></span>
-        </label>
-        <label class="custom_checkbox">category_name
-          <input type="checkbox" checked>
-          <span class="checkmark"></span>
-        </label>
-        <label class="custom_checkbox">category_name
+        <label class="custom_checkbox" v-for="category in categories" :key="category.id">
+          {{ category.name }}
           <input type="checkbox" checked>
           <span class="checkmark"></span>
         </label>
@@ -28,7 +21,12 @@
 
 <script>
   export default {
-    name: 'FilterModal'
+    name: 'FilterModal',
+    computed: {
+      categories(){
+        return this.$store.state.category
+      }
+    }
   }
 </script>
 

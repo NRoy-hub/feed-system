@@ -9,12 +9,12 @@
       <div class="feed">
         <option-bar @open-filter="toggleFilter(true)"></option-bar>
         <section class="feed_list">
-          <feed-item v-for="feed in feeds" :key="feed.id"></feed-item>
+          <feed-item v-for="feed in feeds" :key="feed.id" v-bind="feed"></feed-item>
           <commercial-item v-for="commercial in commercials" :key="commercial.id"></commercial-item>
         </section>
       </div>
     </div>
-    <filter-modal v-if="open_filter" @close-filter="toggleFilter(false)"></filter-modal>
+    <filter-modal v-if="openFilter" @close-filter="toggleFilter(false)"></filter-modal>
   </main>
 </template>
 
@@ -34,15 +34,44 @@
     },
     data(){
       return {
-        feeds: [{ id: 'feed-01' }],
-        commercials: [{ id: 'ad-01' }],
-        open_filter: false
+        feeds: [],
+        commercials: [],
+        openFilter: false
       }
     },
     methods: {
       toggleFilter(next){
-        this.open_filter = next;
+        this.openFilter = next;
       }
+    },
+    created(){
+      (async function(vm){
+        const store = vm.$store
+        // * get category
+        await vm.$requestApi({
+          method: 'get',
+          path: '/api/category',
+          success: ({ category }) => {
+            store.commit('setCategory', { category })
+          }
+        })
+        // * get list
+        const category = store.state.category.map(({ id }) => id)
+        await vm.$requestApi({
+          method: 'get',
+          path: '/api/list',
+          params: {
+            page: 1,
+            ord: 'asc',
+            limit: 10,
+            category
+          },
+          success: (res) => {
+            vm.feeds = res.data
+          }
+        })
+
+      })(this);
     }
   }
 </script>
