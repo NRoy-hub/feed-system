@@ -1,19 +1,20 @@
 <template>
   <main class="detail-page page">
-    <div class="detail_wrapper wrapper">
+    <div class="detail_wrapper wrapper" >
       <section class="feed">
-        <h2 class="title">Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title </h2>
-        <p class="contents">contents contents contents contents contents contents contents contents contents contents contents </p>
-        <div class="created_at">YYYY-MM-dd</div>
+        <h2 class="title">{{ detail.title || '' }}</h2>
+        <p class="contents">{{ detail.contents || '' }}</p>
+        <div class="created_at">{{ detail.created_at ? $formatDate(detail.created_at) : '' }}</div>
       </section>
-      <section class="comments">
+      <section class="replys">
         <header>
           <div class="result">
-            답변<span class="result_count">2</span>
+            답변
+            <span class="result_count">{{ detail.reply ? detail.reply.length : 0 }}</span>
           </div>
         </header>
-        <div class="comments_list">
-          <comment-item v-for="comment in comments" :key="comment.id"></comment-item>
+        <div class="replys_list">
+          <reply-item v-for="item in detail.reply" :key="item.id" v-bind="item"></reply-item>
         </div>
       </section>
     </div>
@@ -21,19 +22,29 @@
 </template>
 
 <script>
-  import CommentItem from './20_CommentItem'
+  import ReplyItem from './20_ReplyItem'
   export default {
     name: 'Detail',
     components: {
-      'comment-item': CommentItem
+      'reply-item': ReplyItem
     },
     data(){
       return {
-        comments: [
-          { id: 'commend_01' },
-          { id: 'commend_02' }
-        ]
+        detail: {}
       }
+    },
+    created(){
+      window.scrollTo(0, 0)
+      this.$store.commit('load_on')
+      this.$requestApi({
+        method: 'get',
+        path: '/api/view',
+        params: { id: this.$route.params.id },
+        success: ({ data }) => {
+          this.detail = data
+        },
+        common: () => this.$store.commit('load_off')
+      })
     }
   }
 </script>
