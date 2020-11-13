@@ -1,10 +1,10 @@
 <template>
   <header class="option_bar">
     <div class="order_buttons">
-      <div class="order selected">
+      <div :class="['order', order === 'asc' ? 'selected' : '']" @click="changeOrder('asc')">
         <span>오름차순</span>
       </div>
-      <div class="order">
+      <div :class="['order', order === 'desc' ? 'selected' : '']" @click="changeOrder('desc')">
         <span>내림차순</span>
       </div>
     </div>
@@ -16,7 +16,16 @@
 
 <script>
   export default {
-    name: 'OptionBar'
+    name: 'OptionBar',
+    props: {
+      order: String
+    },
+    methods: {
+      changeOrder(next){
+        if(this.order === next)return
+        this.$emit('update:order', next) 
+      }
+    }
   }
 </script>
 
