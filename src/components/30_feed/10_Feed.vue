@@ -47,14 +47,18 @@
     created(){
       (async function(vm){
         const store = vm.$store
+        store.commit('load_on')
         // * get category
         await vm.$requestApi({
           method: 'get',
           path: '/api/category',
           success: ({ category }) => {
-            store.commit('setCategory', { category })
+            store.commit('set_category', { category })
           }
         })
+        if(store.state.category.length === 0){
+          return store.commit('load_off')
+        }
         // * get list
         const category = store.state.category.map(({ id }) => id)
         await vm.$requestApi({
@@ -68,9 +72,11 @@
           },
           success: (res) => {
             vm.feeds = res.data
+          },
+          common(){
+            store.commit('load_off')
           }
         })
-
       })(this);
     }
   }
