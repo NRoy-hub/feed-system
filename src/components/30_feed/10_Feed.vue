@@ -19,6 +19,7 @@
             v-for="(commercial, index) in showCommercials"
             :style="{ order: index }"
             :key="`commercial_${ commercial.id }`"
+            v-bind="commercial"
           ></commercial-item>
         </section>
       </div>
@@ -47,44 +48,50 @@
     },
     data(){
       return {
-        feedPage: 1,
-        commercialPage: 1,
         order: 'asc',
         feeds: [],
+        feedPage: 1,
+        feedEnd: false,
         commercials: [],
+        commercialPage: 1,
+        commercialEnd: false,
         openFilter: false,
         filterCategory: [],
-        end: false,
         cycle: 4
       }
     },
     watch: {
       filterCategory(){
         this.feedPage = 1
-        this.end = false
+        this.feedEnd = false
         this.updateFeeds(data => {
           this.feeds = data
         })
       },
       order(){
         this.feedPage = 1
-        this.end = false
+        this.feedEnd = false
         this.updateFeeds(data => {
           this.feeds = data
         })
       },
       feeds(){
+        if(this.commercialEnd)return
         if(this.commercials.length < Math.floor(this.feeds.length / this.cycle)){
           const limit = 5
+          this.$store.commit('load_on')
           this.$requestApi({
             method: 'get',
             path: '/api/ads',
             params: { page: this.commercialPage, limit },
             success: (res) => {
               this.commercials = [...this.commercials, ...res.data]
-              this.commercialPage = 
-                (res.current_page === res.last_page) ? 1 : this.commercialPage + 1
-            }
+              if(res.current_page === res.last_page){
+                this.commercialEnd = true
+              }
+              this.commercialPage += 1
+            },
+            common: () => this.$store.commit('load_off')
           })
         }
       }
@@ -100,7 +107,7 @@
       handleScroll(){
         const { scrollY, innerHeight } = window;
         const floor = document.documentElement.offsetHeight - scrollY - innerHeight;
-        if(floor < 1 && !this.end){
+        if(floor < 1 && !this.feedEnd){
           this.updateFeeds(data => {
             this.feeds = [ ...this.feeds, ...data ]
           })
@@ -122,7 +129,7 @@
           },
           success: (res) => {
             if(res.current_page === res.last_page){
-              this.end = true
+              this.feedEnd = true
             }
             this.feedPage += 1
             cb(res.data)

@@ -35,3 +35,5 @@ export const formatDate = (str) => {
   return `${ year }-${ month }-${ day < 10 ? '0' : '' }${ day }`
 
 }
+
+export const imageUrl = 'https://cdn.comento.kr/assignment/'

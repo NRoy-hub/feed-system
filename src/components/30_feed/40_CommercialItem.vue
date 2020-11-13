@@ -6,11 +6,11 @@
       </header>
       <div class="commercial_container">
         <figure>
-          <img src="" alt="commercial_image">
+          <img :src="$imageUrl + img" alt="commercial_image">
         </figure>
         <div class="content_container">
-          <div class="title">Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title</div>
-          <p class="contents">content content content content content content content content content content content content content content content content content content content content content content content </p>
+          <div class="title">{{ title }}</div>
+          <p class="contents">{{ contents }}</p>
         </div>
       </div>
     </a>
@@ -21,7 +21,11 @@
   export default {
     name: 'CommercialItem',
     props: {
-      id: String
+      id: Number,
+      title: String,
+      contents: String,
+      created_at: String,
+      img: String
     }
   }
 </script>
