@@ -43,47 +43,64 @@
         feeds: [],
         commercials: [],
         openFilter: false,
-        filterCategory: []
+        filterCategory: [],
+        end: false
       }
     },
     watch: {
       filterCategory(){
         this.page = 1
+        this.end = false
         this.updateFeeds(data => {
           this.feeds = data
         })
       },
       order(){
         this.page = 1
+        this.end = false
         this.updateFeeds(data => {
           this.feeds = data
         })
       }
     },
     methods: {
+      handleScroll(){
+        const { scrollY, innerHeight } = window;
+        const floor = document.documentElement.offsetHeight - scrollY - innerHeight;
+        if(floor < 1 && !this.end){
+          this.updateFeeds(data => {
+            this.feeds = [ ...this.feeds, ...data ]
+          })
+        }
+      },
       toggleFilter(next){ this.openFilter = next },      
       updateFilter(next){ this.filterCategory = next },
       updateFeeds(cb){
         const { filterCategory: category, order: ord, $store: store, page } = this
+        if(store.state.loading)return
 
         this.$store.commit('load_on')
         this.$requestApi({
           method: 'get',
           path: '/api/list',
           params: {
-            page,
-            ord,
-            limit: 10,
-            category
+            page, ord, category,
+            limit: 10
           },
-          success: (res) => cb(res.data),
+          success: (res) => {
+            if(res.current_page === res.last_page){
+              this.end = true
+            }
+            this.page += 1
+            cb(res.data)
+          },
           common: () => store.commit('load_off')
         })
       }
     },
     created(){
-      const store = this.$store
       // * get category
+      const store = this.$store
       store.commit('load_on')
       this.$requestApi({
         method: 'get',
@@ -94,6 +111,12 @@
         },
         common: () => store.commit('load_off')
       })
+
+      // * scroll
+      window.addEventListener('scroll', this.handleScroll)
+    },
+    destroyed(){
+      window.removeEventListener('scroll', this.handleScroll)
     }
   }
 </script>
