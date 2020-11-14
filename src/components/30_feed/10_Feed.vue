@@ -7,7 +7,11 @@
         </div>
       </aside>
       <div class="feed">
-        <option-bar @open-filter="toggleFilter(true)"></option-bar>
+        <option-bar 
+          @open-filter="toggleFilter(true)"
+          @open-setting="toggleSetting(true)"
+        >
+        </option-bar>
         <section class="feed_list">
           <feed-item 
             v-for="(feed, index) in feeds" 
@@ -30,15 +34,20 @@
     <modal-wrapper v-if="openFilter" >
       <filter-form  @close-filter="toggleFilter(false)"></filter-form>
     </modal-wrapper>
+    <modal-wrapper v-if="openSetting" >
+      <setting-form  @close-filter="toggleSetting(false)"></setting-form>
+    </modal-wrapper>
+    
   </main>
 </template>
 
 <script>
-  import ModalWrapper from '@/components/10_app/30_Modal'
   import OptionBar from './20_OptionBar'
   import FeedItem from './30_FeedItem'
   import CommercialItem from './40_CommercialItem'
+  import ModalWrapper from '@/components/10_app/30_Modal'
   import FilterForm from './15_FilterForm'
+  import SettingForm from './17_SettingForm'
 
   export default {
     name: "Feed",
@@ -47,11 +56,13 @@
       'feed-item': FeedItem,
       'commercial-item': CommercialItem,
       'modal-wrapper': ModalWrapper,
-      'filter-form': FilterForm
+      'filter-form': FilterForm,
+      'setting-form': SettingForm
     },
     data(){
       return {
         openFilter: false,
+        openSetting: false,
         cycle: 4
       }
     },
@@ -66,6 +77,7 @@
     },
     methods: {
       toggleFilter(next){ this.openFilter = next },
+      toggleSetting(next){ this.openSetting = next },
       handleScroll(){
         const { scrollY, innerHeight } = window;
         const floor = document.documentElement.offsetHeight - scrollY - innerHeight;

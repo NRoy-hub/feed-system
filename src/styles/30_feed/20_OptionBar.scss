@@ -30,11 +30,20 @@
     }
   }
 
-  .filter_button{
+  .open_buttons{
+    display: flex;
     margin-top: 10px;
-    border: 1px solid $border_color;
-    border-radius: 3px;
-    padding: 5px 14px 3px 12px;
-    cursor: pointer;
+
+    .open_button{
+      border: 1px solid $border_color;
+      border-radius: 3px;
+      padding: 5px 14px 3px 12px;
+      cursor: pointer;
+      &:not(:first-of-type){
+        margin-left: 6px;
+      }
+    }
+
   }
+
 }

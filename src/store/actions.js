@@ -78,5 +78,11 @@ export default {
         common: () => commit('load_off')
       })
     }
+  },
+  update_settings({ state, commit, dispatch }, { settings }){
+    if(state.settings.infinity_scroll.checked !== settings.infinity_scroll.checked){
+      dispatch('update_feeds')
+    }
+    commit('set_settings', { settings })
   }
 }

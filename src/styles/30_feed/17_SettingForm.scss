@@ -1,4 +1,4 @@
-.modal_form{
+.setting_form{
   position: relative;
   box-sizing: border-box;
   width: 89.8%;
@@ -12,11 +12,11 @@
     line-height: 32px;
     color: #212529;
   }
-  .categories{
+  .options{
     @include flex_box(column, null, flex-start);
     
     label{
-      @include custom_checkbox($custom_green);
+      @include custom_checkbox(#95a5a6);
       color: #495057;
         margin-top: 10px;
     }
@@ -25,7 +25,7 @@
     width: 100%;
     margin-top: 30px;
     padding: 13px 0 8px;
-    background: $custom_green;
+    background: #95a5a6;
     outline: none;
     border: none;
     border-radius: 3px;

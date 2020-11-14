@@ -38,7 +38,7 @@
   }
 }
 
-@mixin custom_checkbox(){
+@mixin custom_checkbox($checked_color){
   position: relative;
   box-sizing: border-box;
   padding-left: 25px;
@@ -76,8 +76,8 @@
 
   input:checked{
     ~ .checkmark{ 
-      background: $custom_green;
-      border-color: $custom_green;
+      background: $checked_color;
+      border-color: $checked_color;
     }
     ~ .checkmark::after{ display: block; }
   }

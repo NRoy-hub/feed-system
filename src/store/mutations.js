@@ -5,6 +5,9 @@ export default {
   set_filter_category(state, payload){
     state.filter_category = payload.category
   },
+  set_settings(state, payload){
+    state.settings = payload.settings
+  },
   load_on(state){
     state.loading = true
   },

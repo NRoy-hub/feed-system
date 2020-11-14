@@ -23,7 +23,12 @@ const state = {
   commercial_page: 1,
   commercial_end: false,
   commercial_cycle: 4,
-  commercial_limit: 5
+  commercial_limit: 5,
+  // * setting option
+  settings: {
+    contents_ellipsis: { title: '글 내용 생락', checked: true },
+    infinity_scroll: { title: '무한 스크롤 사용', checked: true }
+  }
 }
 
 export default new Vuex.Store({
