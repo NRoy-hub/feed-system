@@ -1,5 +1,5 @@
 <template>
-  <article class="feed_item">
+  <article :class="['feed_item', applyEllipsis ? 'ellipsis' : '']">
     <header>
       <div class="category">{{ categoryName }}</div>
       <div class="content_id">{{ id }}</div>
@@ -40,6 +40,9 @@
       },
       formattedDate(){
         return this.$formatDate(this.created_at)
+      },
+      applyEllipsis(){
+        return this.$store.state.settings.contents_ellipsis.checked
       }
     },
 

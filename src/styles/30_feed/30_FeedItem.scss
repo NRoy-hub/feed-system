@@ -4,6 +4,10 @@
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
   background: white;
 
+  &.ellipsis .contents{
+    @include ellipsis_multiple(100%, 25px, 25px);
+  }
+
   header{
     padding-bottom: 10px;
     border-bottom: 1px solid $border_color;
@@ -34,16 +38,17 @@
 
   .title{
     margin-top: 15px;
-    @include ellipsis_multiple(100%, 28px, 28px);
     font-size: 18px;
+    line-height: 28px;
     font-weight: bold;
     color: $title_color;
+    @include ellipsis_multiple(100%, 28px, 28px);
   }
   .contents{
-    margin-top: 5px;
+    margin-top: 8px;
     display: block;
-    @include ellipsis_multiple(100%, 25px, 25px);
+    line-height: 25px;
+    font-size: 16px;
     color: $contents_color;
   }
-
 }

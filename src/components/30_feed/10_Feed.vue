@@ -81,7 +81,8 @@
       handleScroll(){
         const { scrollY, innerHeight } = window;
         const floor = document.documentElement.offsetHeight - scrollY - innerHeight;
-        if(floor < 1 && !this.$store.state.feed_end){
+        const { feed_end, loading } = this.$store.state
+        if(floor < 1 && !feed_end && !loading){
           this.$store.dispatch('add_feeds')
         }
       },
