@@ -1,9 +1,10 @@
 <template>
-  <article class="commercial_item">
-    <a href="#">
+  <article :class="['commercial_item', fold ? 'fold' : '']">
       <header>
         <span class="sponsored">sponsored</span>
+        <span class="hidden_button" @click="toggleFold">{{ fold ? '펼치기' : '접기' }}</span>
       </header>
+    <a href="#">
       <div class="commercial_container">
         <figure>
           <img :src="$imageUrl + img" alt="commercial_image">
@@ -25,7 +26,13 @@
       title: String,
       contents: String,
       created_at: String,
-      img: String
+      img: String,
+      fold: Boolean
+    },
+    methods: {
+      toggleFold(){
+        this.$emit('fold_commercial')
+      }
     }
   }
 </script>

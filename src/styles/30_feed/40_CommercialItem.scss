@@ -1,9 +1,13 @@
 .commercial_item{
-  
-  .sponsored{
+  background: white;
+  header{
+    @include flex_box(row, space-between);
     font-size: 13px;
     line-height: 20px;
     color: $unused_color;
+    .hidden_button{
+      cursor: pointer;
+    }
   }
   .commercial_container{
     position: relative;
@@ -37,6 +41,19 @@
         line-height: 25px;
         color: $contents_color; 
         @include ellipsis_multiple(100%, 25px, 50px);
+      }
+    }
+  }
+
+  &.fold{
+    background: #f4f5f7;
+    background: $border_color;
+    .commercial_container{
+      .title{
+        margin-top: 0;
+      }
+      figure, .contents{
+        display: none;
       }
     }
   }

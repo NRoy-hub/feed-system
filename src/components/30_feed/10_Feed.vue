@@ -19,6 +19,8 @@
             v-for="(commercial, index) in showCommercials"
             :style="{ order: index }"
             :key="`commercial_${ commercial.id }`"
+            :fold="foldedCommercials.includes(index)"
+            @fold_commercial="foldCommercial(index)"
             v-bind="commercial"
           ></commercial-item>
         </section>
@@ -53,6 +55,7 @@
         feedPage: 1,
         feedEnd: false,
         commercials: [],
+        foldedCommercials: [],
         commercialPage: 1,
         commercialEnd: false,
         openFilter: false,
@@ -62,18 +65,10 @@
     },
     watch: {
       filterCategory(){
-        this.feedPage = 1
-        this.feedEnd = false
-        this.updateFeeds(data => {
-          this.feeds = data
-        })
+        this.resetFeeds()
       },
       order(){
-        this.feedPage = 1
-        this.feedEnd = false
-        this.updateFeeds(data => {
-          this.feeds = data
-        })
+        this.resetFeeds()
       },
       feeds(){
         if(this.commercialEnd)return
@@ -115,6 +110,13 @@
       },
       toggleFilter(next){ this.openFilter = next },      
       updateFilter(next){ this.filterCategory = next },
+      foldCommercial(commercialIndex){
+        const index = this.foldedCommercials.indexOf(commercialIndex)
+        if(index === -1)
+          this.foldedCommercials.push(commercialIndex)
+        else 
+          this.foldedCommercials.splice(index, 1)
+      },
       updateFeeds(cb){
         const { filterCategory: category, order: ord, $store: store, feedPage: page } = this
         if(store.state.loading)return
@@ -135,6 +137,14 @@
             cb(res.data)
           },
           common: () => store.commit('load_off')
+        })
+      },
+      resetFeeds(){
+        this.feedPage = 1
+        this.feedEnd = false
+        this.foldedCommercials = []
+        this.updateFeeds(data => {
+          this.feeds = data
         })
       }
     },
