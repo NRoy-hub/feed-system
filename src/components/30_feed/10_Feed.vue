@@ -15,6 +15,7 @@
             :style="{ order: Math.floor(index / cycle) }"
             v-bind="feed"
           ></feed-item>
+          
           <commercial-item 
             v-for="(commercial, index) in showCommercials"
             :style="{ order: index }"
@@ -63,14 +64,19 @@
         cycle: 4
       }
     },
+    computed: {
+      showCommercials(){
+        const base = Math.floor(this.feeds.length / this.cycle)
+        const length = this.feeds.length % this.cycle === 0 ? base - 1 : base;
+        return [...this.commercials].splice(0, length)
+      }
+    },
     watch: {
-      filterCategory(){
-        this.resetFeeds()
-      },
-      order(){
-        this.resetFeeds()
-      },
-      feeds(){
+      // * Reset feeds when update category or order
+      filterCategory(){ this.resetFeeds() },
+      order(){ this.resetFeeds() },
+      // * Update commercial when update feeds
+      feeds(){ 
         if(this.commercialEnd)return
         if(this.commercials.length < Math.floor(this.feeds.length / this.cycle)){
           const limit = 5
@@ -91,23 +97,7 @@
         }
       }
     },
-    computed: {
-      showCommercials(){
-        const base = Math.floor(this.feeds.length / this.cycle)
-        const length = this.feeds.length % this.cycle === 0 ? base - 1 : base;
-        return [...this.commercials].splice(0, length)
-      }
-    },
     methods: {
-      handleScroll(){
-        const { scrollY, innerHeight } = window;
-        const floor = document.documentElement.offsetHeight - scrollY - innerHeight;
-        if(floor < 1 && !this.feedEnd){
-          this.updateFeeds(data => {
-            this.feeds = [ ...this.feeds, ...data ]
-          })
-        }
-      },
       toggleFilter(next){ this.openFilter = next },      
       updateFilter(next){ this.filterCategory = next },
       foldCommercial(commercialIndex){
@@ -143,10 +133,15 @@
         this.feedPage = 1
         this.feedEnd = false
         this.foldedCommercials = []
-        this.updateFeeds(data => {
-          this.feeds = data
-        })
-      }
+        this.updateFeeds(data => { this.feeds = data })
+      },
+      handleScroll(){
+        const { scrollY, innerHeight } = window;
+        const floor = document.documentElement.offsetHeight - scrollY - innerHeight;
+        if(floor < 1 && !this.feedEnd){
+          this.updateFeeds(data => { this.feeds = [ ...this.feeds, ...data ] })
+        }
+      },
     },
     created(){
       // * get category
@@ -162,7 +157,7 @@
         common: () => store.commit('load_off')
       })
 
-      // * scroll
+      // * handle scroll
       window.addEventListener('scroll', this.handleScroll)
     },
     destroyed(){
