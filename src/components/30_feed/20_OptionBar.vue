@@ -17,13 +17,15 @@
 <script>
   export default {
     name: 'OptionBar',
-    props: {
-      order: String
+    computed: {
+      order(){
+        return this.$store.state.feed_order
+      }
     },
     methods: {
-      changeOrder(next){
-        if(this.order === next)return
-        this.$emit('update:order', next) 
+      changeOrder(order){
+        if(this.order === order)return
+        this.$store.dispatch('change_feed_order', { order })
       }
     }
   }

@@ -10,7 +10,7 @@
 import Vue from 'vue'
 import { requestApi, formatDate, imageUrl } from '@/common'
 import router from '@/router'
-import store from '@/store'
+import store from '@/store/_store.js'
 import Topbar from '@/components/20_topbar/10_Topbar'
 import Loading from './20_Loading'
 

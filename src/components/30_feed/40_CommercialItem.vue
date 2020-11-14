@@ -27,11 +27,20 @@
       contents: String,
       created_at: String,
       img: String,
+      index: Number,
       fold: Boolean
     },
     methods: {
       toggleFold(){
-        this.$emit('fold_commercial')
+        const store = this.$store
+        const folded = [...store.state.folded_commercials]
+        const position = folded.indexOf(this.index)
+        if(position === -1){
+          folded.push(this.index)
+        }else{
+          folded.splice(position, 1)
+        }
+        store.commit('set_commercial_fold', { folded })
       }
     }
   }

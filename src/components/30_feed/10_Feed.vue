@@ -7,7 +7,7 @@
         </div>
       </aside>
       <div class="feed">
-        <option-bar @open-filter="toggleFilter(true)" :order.sync="order"></option-bar>
+        <option-bar @open-filter="toggleFilter(true)"></option-bar>
         <section class="feed_list">
           <feed-item 
             v-for="(feed, index) in feeds" 
@@ -15,13 +15,13 @@
             :style="{ order: Math.floor(index / cycle) }"
             v-bind="feed"
           ></feed-item>
-          
+
           <commercial-item 
             v-for="(commercial, index) in showCommercials"
             :style="{ order: index }"
             :key="`commercial_${ commercial.id }`"
             :fold="foldedCommercials.includes(index)"
-            @fold_commercial="foldCommercial(index)"
+            :index="index"
             v-bind="commercial"
           ></commercial-item>
         </section>
@@ -30,7 +30,6 @@
     <filter-modal 
       v-if="openFilter" 
       @close-filter="toggleFilter(false)"
-      :filter_category.sync="filterCategory"
     ></filter-modal>
   </main>
 </template>
@@ -51,112 +50,36 @@
     },
     data(){
       return {
-        order: 'asc',
-        feeds: [],
-        feedPage: 1,
-        feedEnd: false,
-        commercials: [],
-        foldedCommercials: [],
-        commercialPage: 1,
-        commercialEnd: false,
         openFilter: false,
-        filterCategory: [],
         cycle: 4
       }
     },
     computed: {
+      feeds(){ return this.$store.state.feeds },
       showCommercials(){
-        const base = Math.floor(this.feeds.length / this.cycle)
-        const length = this.feeds.length % this.cycle === 0 ? base - 1 : base;
-        return [...this.commercials].splice(0, length)
-      }
-    },
-    watch: {
-      // * Reset feeds when update category or order
-      filterCategory(){ this.resetFeeds() },
-      order(){ this.resetFeeds() },
-      // * Update commercial when update feeds
-      feeds(){ 
-        if(this.commercialEnd)return
-        if(this.commercials.length < Math.floor(this.feeds.length / this.cycle)){
-          const limit = 5
-          this.$store.commit('load_on')
-          this.$requestApi({
-            method: 'get',
-            path: '/api/ads',
-            params: { page: this.commercialPage, limit },
-            success: (res) => {
-              this.commercials = [...this.commercials, ...res.data]
-              if(res.current_page === res.last_page){
-                this.commercialEnd = true
-              }
-              this.commercialPage += 1
-            },
-            common: () => this.$store.commit('load_off')
-          })
-        }
+        return this.$store.getters.show_commercials
+      },
+      foldedCommercials(){
+        return this.$store.state.folded_commercials
       }
     },
     methods: {
-      toggleFilter(next){ this.openFilter = next },      
-      updateFilter(next){ this.filterCategory = next },
-      foldCommercial(commercialIndex){
-        const index = this.foldedCommercials.indexOf(commercialIndex)
-        if(index === -1)
-          this.foldedCommercials.push(commercialIndex)
-        else 
-          this.foldedCommercials.splice(index, 1)
-      },
-      updateFeeds(cb){
-        const { filterCategory: category, order: ord, $store: store, feedPage: page } = this
-        if(store.state.loading)return
-
-        this.$store.commit('load_on')
-        this.$requestApi({
-          method: 'get',
-          path: '/api/list',
-          params: {
-            page, ord, category,
-            limit: 10
-          },
-          success: (res) => {
-            if(res.current_page === res.last_page){
-              this.feedEnd = true
-            }
-            this.feedPage += 1
-            cb(res.data)
-          },
-          common: () => store.commit('load_off')
-        })
-      },
-      resetFeeds(){
-        this.feedPage = 1
-        this.feedEnd = false
-        this.foldedCommercials = []
-        this.updateFeeds(data => { this.feeds = data })
-      },
+      toggleFilter(next){ this.openFilter = next },
       handleScroll(){
         const { scrollY, innerHeight } = window;
         const floor = document.documentElement.offsetHeight - scrollY - innerHeight;
-        if(floor < 1 && !this.feedEnd){
-          this.updateFeeds(data => { this.feeds = [ ...this.feeds, ...data ] })
+        if(floor < 1 && !this.$store.state.feed_end){
+          this.$store.dispatch('add_feeds')
         }
       },
     },
     created(){
       // * get category
-      const store = this.$store
-      store.commit('load_on')
-      this.$requestApi({
-        method: 'get',
-        path: '/api/category',
-        success: ({ category }) => {
-          store.commit('set_category', { category })
-          this.filterCategory = category.map(item => item.id)
-        },
-        common: () => store.commit('load_off')
+      this.$store.dispatch('get_category', () => {
+        this.$store.dispatch('change_filter_category', { 
+          category: this.$store.getters.id_category 
+        })
       })
-
       // * handle scroll
       window.addEventListener('scroll', this.handleScroll)
     },

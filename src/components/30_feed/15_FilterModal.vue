@@ -7,7 +7,7 @@
       <div class="categories">
         <label class="custom_checkbox" v-for="category in categories" :key="category.id">
           {{ category.name }}
-          <input type="checkbox" :name="category.id" :checked="filter_category.includes(category.id)">
+          <input type="checkbox" :name="category.id" :checked="filterCategory.includes(category.id)">
           <span class="checkmark"></span>
         </label>
       </div>
@@ -22,12 +22,12 @@
 <script>
   export default {
     name: 'FilterModal',
-    props: {
-      filter_category: Array
-    },
     computed: {
       categories(){
         return this.$store.state.category
+      },
+      filterCategory(){
+        return this.$store.state.filter_category
       }
     },
     methods: {
@@ -37,7 +37,7 @@
         this.categories.forEach(({ id }) => data.get(id) && result.push(id))
         if(result.length === 0)return alert('카테고리를 선택하지 않았습니다.')
         
-        this.$emit('update:filter_category', result)
+        this.$store.dispatch('change_filter_category', { category: result })
         this.$emit('close-filter')
       }
     }
