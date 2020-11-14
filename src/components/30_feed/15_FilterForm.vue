@@ -1,22 +1,20 @@
 <template>
-  <div class="filter_modal">
-    <form class="modal_form" @submit.prevent="onSubmit">
-      <header>
-        <h3>필터</h3>
-      </header>
-      <div class="categories">
-        <label class="custom_checkbox" v-for="category in categories" :key="category.id">
-          {{ category.name }}
-          <input type="checkbox" :name="category.id" :checked="filterCategory.includes(category.id)">
-          <span class="checkmark"></span>
-        </label>
-      </div>
-      <button>저장하기</button>
-      <div class="cancel_button" @click="$emit('close-filter')">
-        <img src="@/assets/close.png" alt="clonse_icon">
-      </div>
-    </form>
-  </div>
+  <form class="modal_form" @submit.prevent="onSubmit">
+    <header>
+      <h3>필터</h3>
+    </header>
+    <div class="categories">
+      <label class="custom_checkbox" v-for="category in categories" :key="category.id">
+        {{ category.name }}
+        <input type="checkbox" :name="category.id" :checked="filterCategory.includes(category.id)">
+        <span class="checkmark"></span>
+      </label>
+    </div>
+    <button>저장하기</button>
+    <div class="cancel_button" @click="$emit('close-filter')">
+      <img src="@/assets/close.png" alt="clonse_icon">
+    </div>
+  </form>
 </template>
 
 <script>
@@ -45,5 +43,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/30_feed/15_FilterModal.scss';
+  @import '@/styles/30_feed/15_FilterForm.scss';
 </style>

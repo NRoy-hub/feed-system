@@ -27,18 +27,18 @@
         </section>
       </div>
     </div>
-    <filter-modal 
-      v-if="openFilter" 
-      @close-filter="toggleFilter(false)"
-    ></filter-modal>
+    <modal-wrapper v-if="openFilter" >
+      <filter-form  @close-filter="toggleFilter(false)"></filter-form>
+    </modal-wrapper>
   </main>
 </template>
 
 <script>
+  import ModalWrapper from '@/components/10_app/30_Modal'
   import OptionBar from './20_OptionBar'
   import FeedItem from './30_FeedItem'
   import CommercialItem from './40_CommercialItem'
-  import FilterModal from './15_FilterModal'
+  import FilterForm from './15_FilterForm'
 
   export default {
     name: "Feed",
@@ -46,7 +46,8 @@
       'option-bar': OptionBar,
       'feed-item': FeedItem,
       'commercial-item': CommercialItem,
-      'filter-modal': FilterModal
+      'modal-wrapper': ModalWrapper,
+      'filter-form': FilterForm
     },
     data(){
       return {
