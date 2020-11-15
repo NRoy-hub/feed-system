@@ -6,12 +6,12 @@
     <div class="options">
       <label class="custom_checkbox">
         글 내용 생략
-        <input type="checkbox" name="contents_ellipsis" :checked="true">
+        <input type="checkbox" name="contents_ellipsis" :checked="settings.contents_ellipsis">
         <span class="checkmark"></span>
       </label>
       <label class="custom_checkbox">
         무한 스크롤 사용
-        <input type="checkbox" name="infinity_scroll" :checked="true">
+        <input type="checkbox" name="infinity_scroll" :checked="settings.infinity_scroll">
         <span class="checkmark"></span>
       </label>
       <div class="custom_radio">
