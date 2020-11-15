@@ -1,6 +1,7 @@
 import { requestApi } from '@/common'
 
 export default {
+  // * category
   get_category({ commit }, cb){
     commit('load_on')
     requestApi({
@@ -13,6 +14,12 @@ export default {
       common: () => commit('load_off')
     })
   },
+  change_filter_category({ commit, dispatch }, { category }){
+    commit('set_filter_category', { category })
+    dispatch('update_feeds')
+  },
+
+  // * feed
   get_feeds({ commit, state, dispatch }, { isAdd = false } = {}){
     commit('load_on')
     requestApi({
@@ -44,14 +51,8 @@ export default {
   add_feeds({ dispatch }){
     dispatch('get_feeds', { isAdd: true })
   },
-  change_filter_category({ commit, dispatch }, { category }){
-    commit('set_filter_category', { category })
-    dispatch('update_feeds')
-  },
-  change_feed_order({ commit, dispatch }, { order }){
-    commit('set_feed_order', { order })
-    dispatch('update_feeds')
-  },
+
+  // * commercial
   get_commercials({ commit, state }){
     const { 
       feeds, 
@@ -78,6 +79,12 @@ export default {
         common: () => commit('load_off')
       })
     }
+  },
+
+  // * etc
+  change_feed_order({ commit, dispatch }, { order }){
+    commit('set_feed_order', { order })
+    dispatch('update_feeds')
   },
   update_settings({ commit, dispatch }, { settings }){
     commit('set_settings', { settings })
