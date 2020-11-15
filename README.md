@@ -1,24 +1,18 @@
-# feed-system
+# Feed System (과제)
 
-## Project setup
-```
+## 📚Stack
+- Vue
+- Vuex
+- Vue-Router
+- SCSS
+- Axios (HTTP)
+
+## 🏃‍♂️Run
+
+```javascript
+// install node_modules
 npm install
-```
 
-### Compiles and hot-reloads for development
-```
+// run
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
