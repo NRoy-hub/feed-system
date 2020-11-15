@@ -22,6 +22,12 @@
     }
     .custom_radio{
       margin-top: 15px;
+
+      .head{
+        margin-bottom: 14px;
+        font-size: 15px;
+        color: #212529;
+      }
       input[type=radio]{
         display: none;
       }

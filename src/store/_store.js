@@ -27,7 +27,6 @@ const state = {
   // * setting option
   settings: {
     contents_ellipsis: true,
-    infinity_scroll: true,
     limit: 10
   }
 }

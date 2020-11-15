@@ -9,12 +9,9 @@
         <input type="checkbox" name="contents_ellipsis" :checked="settings.contents_ellipsis" @change="onChangeCheckbox">
         <span class="checkmark"></span>
       </label>
-      <label class="custom_checkbox">
-        무한 스크롤 사용
-        <input type="checkbox" name="infinity_scroll" :checked="settings.infinity_scroll" @change="onChangeCheckbox">
-        <span class="checkmark"></span>
-      </label>
+
       <div class="custom_radio">
+        <div class="head">불러오는 개수</div>
         <label>
           <input type="radio" name="limit" value="10" :checked="settings.limit === 10" @change="onChangeRadio">
           <span class="radio_button">10개</span>
