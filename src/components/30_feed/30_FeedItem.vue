@@ -2,11 +2,11 @@
   <article :class="['feed_item', applyEllipsis ? 'ellipsis' : '']">
     <header>
       <div class="category">{{ categoryName }}</div>
-      <div class="content_id">{{ id }}</div>
+      <div class="content_id">{{ id }}번 글</div>
     </header>
     <div class="feed_container">
       <div>
-        <span class="user_id">{{ user_id }}</span>
+        <span class="user_id">작성자 {{ user_id }}</span>
         <span class="created_at">{{ formattedDate }}</span>
       </div>
       <h2 class="title">{{ title }}</h2>
