@@ -7,7 +7,7 @@
     <a href="#">
       <div class="commercial_container">
         <figure>
-          <img :src="$imageUrl + img" alt="commercial_image">
+          <div class="image" :style="{ backgroundImage: `url(${ $imageUrl + img })` }"></div>
         </figure>
         <div class="content_container">
           <div class="title">{{ title }}</div>

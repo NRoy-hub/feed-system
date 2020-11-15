@@ -45,9 +45,9 @@
   
             figure{
               flex-shrink: 0;
-              img{
+              .image{
                 @include size(310px, 179px);
-                object-fit: scale-down;
+                padding: 0;
               }
             }
             .content_container{
