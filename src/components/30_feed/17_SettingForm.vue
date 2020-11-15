@@ -6,25 +6,25 @@
     <div class="options">
       <label class="custom_checkbox">
         글 내용 생략
-        <input type="checkbox" name="contents_ellipsis" :checked="settings.contents_ellipsis">
+        <input type="checkbox" name="contents_ellipsis" :checked="settings.contents_ellipsis" @change="onChangeCheckbox">
         <span class="checkmark"></span>
       </label>
       <label class="custom_checkbox">
         무한 스크롤 사용
-        <input type="checkbox" name="infinity_scroll" :checked="settings.infinity_scroll">
+        <input type="checkbox" name="infinity_scroll" :checked="settings.infinity_scroll" @change="onChangeCheckbox">
         <span class="checkmark"></span>
       </label>
       <div class="custom_radio">
         <label>
-          <input type="radio" name="limit" value="10" :checked="settings.limit === 10">
+          <input type="radio" name="limit" value="10" :checked="settings.limit === 10" @change="onChangeRadio">
           <span class="radio_button">10개</span>
         </label>
         <label>
-          <input type="radio" name="limit" value="20" :checked="settings.limit === 20">
+          <input type="radio" name="limit" value="20" :checked="settings.limit === 20" @change="onChangeRadio">
           <span class="radio_button">20개</span>
         </label>
         <label>
-          <input type="radio" name="limit" value="30" :checked="settings.limit === 30">
+          <input type="radio" name="limit" value="30" :checked="settings.limit === 30" @change="onChangeRadio">
           <span class="radio_button">30개</span>
         </label>
       </div>
@@ -39,21 +39,23 @@
 <script>
   export default {
     name: 'SettingForm',
-    computed: {
-      settings(){
-        return this.$store.state.settings
+    data(){
+      return{
+        settings: { ...this.$store.state.settings }
       }
     },
     methods: {
-      onSubmit(e){
-        const data = new FormData(e.target)
-        const settings = {
-          contents_ellipsis: !!data.get('contents_ellipsis'),
-          infinity_scroll: !!data.get('infinity_scroll'),
-          limit: parseInt(data.get('limit'))
-        }
-        this.$store.dispatch('update_settings', { settings })
+      onSubmit(){
+        this.$store.dispatch('update_settings', { settings: this.settings })
         this.$emit('close-filter')
+      },
+      onChangeCheckbox(e){
+        const { name, checked } = e.target
+        this.settings[name] = checked
+      },
+      onChangeRadio(e){
+        const { name, value } = e.target
+        this.settings[name] = parseInt(value)
       }
     }
   }

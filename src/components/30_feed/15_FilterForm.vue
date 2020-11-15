@@ -6,7 +6,7 @@
     <div class="categories">
       <label class="custom_checkbox" v-for="category in categories" :key="category.id">
         {{ category.name }}
-        <input type="checkbox" :name="category.id" :checked="filterCategory.includes(category.id)">
+        <input type="checkbox" :name="category.id" :checked="filterCategory.includes(category.id)" @change="onChange">
         <span class="checkmark"></span>
       </label>
     </div>
@@ -20,24 +20,33 @@
 <script>
   export default {
     name: 'FilterModal',
+    data(){
+      return{
+        filterCategory: [ ...this.$store.state.filter_category]
+      }
+    },
     computed: {
       categories(){
         return this.$store.state.category
-      },
-      filterCategory(){
-        return this.$store.state.filter_category
       }
     },
     methods: {
-      onSubmit(e){
-        const result = []
-        const data = new FormData(e.target)
-        this.categories.forEach(({ id }) => data.get(id) && result.push(id))
-        if(result.length === 0)return alert('카테고리를 선택하지 않았습니다.')
-        this.$store.dispatch('change_filter_category', { category: result })
+      onSubmit(){
+        const category = this.filterCategory
+        if(category.length === 0)return alert('카테고리가 선택되지 않았습니다')
+        this.$store.dispatch('change_filter_category', { category })
         this.$emit('close-filter')
         // * save to local storage
-        localStorage.setItem('filter_category', this.filterCategory.toString())
+        localStorage.setItem('filter_category', category.toString())
+      },
+      onChange(e){
+        const { name } = e.target
+        const id = parseInt(name)
+          const index = this.filterCategory.indexOf(id)
+        if(index === -1)
+          this.filterCategory.push(id)
+        else
+          this.filterCategory.splice(index, 1)
       }
     }
   }
