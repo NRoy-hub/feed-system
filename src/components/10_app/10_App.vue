@@ -8,7 +8,7 @@
 
 <script>
 import Vue from 'vue'
-import { formatDate, imageUrl, requestApi } from '@/common'
+import { formatDate, imageUrl, requestApi, getStorageArray } from '@/common'
 import router from '@/router'
 import store from '@/store/_store.js'
 import Topbar from '@/components/20_topbar/10_Topbar'
@@ -32,8 +32,9 @@ export default {
 
     // * get category
     this.$store.dispatch('get_category', () => {
+      const localCategory = getStorageArray(localStorage.getItem('filter_category'))
       this.$store.dispatch('change_filter_category', { 
-        category: this.$store.getters.id_category 
+        category: localCategory || this.$store.getters.id_category 
       })
     })
   }

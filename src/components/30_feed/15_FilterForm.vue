@@ -34,9 +34,10 @@
         const data = new FormData(e.target)
         this.categories.forEach(({ id }) => data.get(id) && result.push(id))
         if(result.length === 0)return alert('카테고리를 선택하지 않았습니다.')
-        
         this.$store.dispatch('change_filter_category', { category: result })
         this.$emit('close-filter')
+        // * save to local storage
+        localStorage.setItem('filter_category', this.filterCategory.toString())
       }
     }
   }

@@ -47,12 +47,12 @@
     methods: {
       onSubmit(e){
         const data = new FormData(e.target)
-        const result = {}
-        Object.keys(this.settings).map(name => {
-          result[name] = data.get(name)
-        })
-        result.limit = parseInt(result.limit)
-        this.$store.dispatch('update_settings', { settings: result })
+        const settings = {
+          contents_ellipsis: !!data.get('contents_ellipsis'),
+          infinity_scroll: !!data.get('infinity_scroll'),
+          limit: parseInt(data.get('limit'))
+        }
+        this.$store.dispatch('update_settings', { settings })
         this.$emit('close-filter')
       }
     }

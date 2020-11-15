@@ -36,4 +36,12 @@ export const formatDate = (str) => {
 
 }
 
+export const getStorageArray = (str) => {
+  if(!str)return null
+  return str.split(',').reduce((prev, current) => {
+    prev.push(parseInt(current))
+    return prev
+  }, [])
+}
+
 export const imageUrl = 'https://cdn.comento.kr/assignment/'
