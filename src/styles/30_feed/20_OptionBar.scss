@@ -1,49 +1,80 @@
 .option_bar{
-  height: 44px;
   padding: 0 4%;
   border-bottom: 1px solid $border_color;
-  @include flex_box(row, space-between, flex-start);
-  font-size: 13px;
-  color: $unused_color;
+  
+  .option_control{
+    height: 44px;
+    @include flex_box(row, space-between, flex-start);
+    font-size: 13px;
+    color: $unused_color;
 
-  .order_buttons{
-    margin-top: 16px;
-    display: flex;
-
-    .order{
-      @include flex_box(row, flex-start, center);
-      margin-right: 13px;
-      cursor: pointer;
-      &::before{
-        @include size(6px, 6px);
-        margin-right: 5px;
-        display: inline-block;
-        background: $border_color;
+    .order_buttons{
+      margin-top: 16px;
+      display: flex;
+  
+      .order{
+        @include flex_box(row, flex-start, center);
+        margin-right: 13px;
+        cursor: pointer;
+        &::before{
+          @include size(6px, 6px);
+          margin-right: 5px;
+          display: inline-block;
+          background: $border_color;
+          border-radius: 3px;
+          content: "";
+        }
+        &.selected{
+          color: #495057;
+          cursor: default;
+          &::before{ background-color: $custom_green; }
+        }
+      }
+    }
+  
+    .open_buttons{
+      display: flex;
+      margin-top: 10px;
+  
+      .open_button{
+        border: 1px solid $border_color;
         border-radius: 3px;
-        content: "";
+        padding: 5px 14px 3px 12px;
+        cursor: pointer;
+        &:not(:first-of-type){
+          margin-left: 6px;
+        }
       }
-      &.selected{
-        color: #495057;
-        cursor: default;
-        &::before{ background-color: $custom_green; }
-      }
+  
     }
   }
 
-  .open_buttons{
-    display: flex;
-    margin-top: 10px;
-
-    .open_button{
+  .option_preview{
+    @include flex_box(row, flex-start, flex-start);
+    flex-wrap: wrap;
+    font-size: 14px;
+    
+    .preview_item{
+      position: relative;
       border: 1px solid $border_color;
-      border-radius: 3px;
-      padding: 5px 14px 3px 12px;
+      padding: 3px 10px 5px;
+      margin-bottom: 6px;
+      border-radius: 100px;
       cursor: pointer;
-      &:not(:first-of-type){
-        margin-left: 6px;
+
+      &:not(:last-child){
+        margin-right: 6px;
+      }
+      &::after{
+        display: inline-block;
+        content: 'x';
+        font-size: 12px;
+        color: $unused_color;
+        margin-left: 5px;
+        transform: translateY(-1px);
       }
     }
-
   }
+
 
 }

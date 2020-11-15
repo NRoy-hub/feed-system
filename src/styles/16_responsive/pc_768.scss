@@ -17,15 +17,14 @@
         display: block;
       }
       .feed{
-        .option_bar{
-          border: none;
+        .option_bar {
           padding: 0;
-  
-          .order_buttons{
-            margin-top: 5px;
-          }
-          .open_buttons{
-            margin: 0;
+          border: none;
+
+          .option_control{
+            height: 35px;
+            .order_buttons{ margin-top: 5px; }
+            .open_buttons{ margin: 0; }
           }
         }
         .feed_list{
