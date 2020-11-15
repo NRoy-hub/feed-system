@@ -33,6 +33,8 @@ export default {
     // * get category
     this.$store.dispatch('get_category', () => {
       const localCategory = getStorageArray(localStorage.getItem('filter_category'))
+      const localOrder = localStorage.getItem('feeds_order')
+      this.$store.commit('set_feed_order', { order: localOrder })
       this.$store.dispatch('change_filter_category', { 
         category: localCategory || this.$store.getters.id_category 
       })

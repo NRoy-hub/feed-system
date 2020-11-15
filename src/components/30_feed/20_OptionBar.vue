@@ -47,6 +47,7 @@
       changeOrder(order){
         if(this.order === order)return
         this.$store.dispatch('change_feed_order', { order })
+        localStorage.setItem('feeds_order', order)
       },
       removeSettingOption(id){
         const copied = [...this.$store.state.filter_category]
