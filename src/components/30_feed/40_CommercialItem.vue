@@ -4,7 +4,7 @@
         <span class="sponsored">sponsored</span>
         <span class="hidden_button" @click="toggleFold">{{ fold ? '펼치기' : '접기' }}</span>
       </header>
-    <a href="#">
+    <a href="">
       <div class="commercial_container">
         <figure>
           <div class="image" :style="{ backgroundImage: `url(${ $imageUrl + img })` }"></div>
