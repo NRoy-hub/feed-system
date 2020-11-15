@@ -22,7 +22,7 @@ export default {
         page: state.feed_page, 
         ord: state.feed_order, 
         category: state.filter_category,
-        limit: 10
+        limit: state.settings.limit
       },
       success: (res) => {
         const feeds = res.data
@@ -57,9 +57,9 @@ export default {
       feeds, 
       commercials, 
       commercial_cycle, 
-      commercial_limit: limit, 
       commercial_page: page,
-      commercial_end: end
+      commercial_end: end,
+      settings
     } = state
 
     if(!end && commercials.length < Math.floor(feeds.length / commercial_cycle)){
@@ -67,7 +67,7 @@ export default {
       requestApi({
         method: 'get',
         path: '/api/ads',
-        params: { page, limit },
+        params: { page, limit: (settings.limit / 2) },
         success: (res) => {
           commit('set_commercials_setting', { 
             page: state.commercial_page + 1, 
@@ -79,10 +79,8 @@ export default {
       })
     }
   },
-  update_settings({ state, commit, dispatch }, { settings }){
-    if(state.settings.infinity_scroll.checked !== settings.infinity_scroll.checked){
-      dispatch('update_feeds')
-    }
+  update_settings({ commit, dispatch }, { settings }){
     commit('set_settings', { settings })
+    dispatch('update_feeds')
   }
 }

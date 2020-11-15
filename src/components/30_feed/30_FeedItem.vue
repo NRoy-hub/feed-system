@@ -42,7 +42,7 @@
         return this.$formatDate(this.created_at)
       },
       applyEllipsis(){
-        return this.$store.state.settings.contents_ellipsis.checked
+        return this.$store.state.settings.contents_ellipsis
       }
     },
 
