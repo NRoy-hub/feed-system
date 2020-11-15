@@ -79,8 +79,8 @@
       toggleFilter(next){ this.openFilter = next },
       toggleSetting(next){ this.openSetting = next },
       handleScroll(){
-        const { scrollY, innerHeight } = window;
-        const floor = document.documentElement.offsetHeight - scrollY - innerHeight;
+        const { scrollY, innerHeight, pageYOffset } = window;
+        const floor = document.documentElement.offsetHeight - (scrollY || pageYOffset) - innerHeight;
         const { feed_end, loading } = this.$store.state
         if(floor < 1 && !feed_end && !loading){
           this.$store.dispatch('add_feeds')
