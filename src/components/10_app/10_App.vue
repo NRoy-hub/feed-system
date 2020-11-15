@@ -8,7 +8,7 @@
 
 <script>
 import Vue from 'vue'
-import { requestApi, formatDate, imageUrl } from '@/common'
+import { formatDate, imageUrl, requestApi } from '@/common'
 import router from '@/router'
 import store from '@/store/_store.js'
 import Topbar from '@/components/20_topbar/10_Topbar'
@@ -26,6 +26,16 @@ export default {
     Vue.prototype.$requestApi = requestApi
     Vue.prototype.$formatDate = formatDate
     Vue.prototype.$imageUrl = imageUrl
+    Vue.prototype.$pushHistory = (path) => {
+      this.$store.commit('add_history', { path })
+    }
+
+    // * get category
+    this.$store.dispatch('get_category', () => {
+      this.$store.dispatch('change_filter_category', { 
+        category: this.$store.getters.id_category 
+      })
+    })
   }
 }
 </script>

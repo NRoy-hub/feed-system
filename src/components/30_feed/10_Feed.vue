@@ -88,12 +88,7 @@
       },
     },
     created(){
-      // * get category
-      this.$store.dispatch('get_category', () => {
-        this.$store.dispatch('change_filter_category', { 
-          category: this.$store.getters.id_category 
-        })
-      })
+      this.$pushHistory(this.$route.path)
       // * handle scroll
       window.addEventListener('scroll', this.handleScroll)
     },

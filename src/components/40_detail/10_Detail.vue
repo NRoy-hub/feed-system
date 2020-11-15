@@ -34,6 +34,7 @@
       }
     },
     created(){
+      this.$pushHistory(this.$route.path)
       window.scrollTo(0, 0)
       this.$store.commit('load_on')
       this.$requestApi({

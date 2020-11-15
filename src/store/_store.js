@@ -8,6 +8,7 @@ Vue.use(Vuex)
 
 const state = {
   loading: false,
+  history: [],
   // * category
   category: [],
   filter_category: [],

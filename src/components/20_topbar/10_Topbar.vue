@@ -2,9 +2,9 @@
   <header class="topbar">
     <div :class="['topbar_wrapper', $route.path !== '/' ? 'can_back' : '']">
       <div class="info">[2020.11.13] 김태혁</div>
-      <router-link :to="home_url" class="back" v-if="$route.path !== '/'">
+      <div class="back" v-if="$route.path !== '/'" @click="goBack">
         <img src="@/assets/back.png" alt="back_icon">
-      </router-link>
+      </div>
     </div>
   </header>
 </template>
@@ -16,6 +16,15 @@
     computed: {
       home_url(){
         return url.feed;
+      }
+    },
+    methods: {
+      goBack(){
+        const stack = this.$store.state.history
+        if(stack[stack.length - 2] === '/')
+          this.$router.go(-1)
+        else
+          this.$router.replace('/')
       }
     }
   }

@@ -36,5 +36,8 @@ export default {
   },
   set_commercial_fold(state, payload){
     state.folded_commercials = payload.folded
+  },
+  add_history(state, payload){
+    state.history.push(payload.path)
   }
 }
