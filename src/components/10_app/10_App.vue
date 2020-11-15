@@ -46,4 +46,5 @@ export default {
   @import '@/styles/10_app/10_App.scss';
   @import '@/styles/16_responsive/pc_768.scss';
   @import '@/styles/16_responsive/pc_1160.scss';
+  @import '@/styles/animation.scss';
 </style>

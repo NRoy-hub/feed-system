@@ -31,13 +31,14 @@
         </section>
       </div>
     </div>
-    <modal-wrapper v-if="openFilter" >
-      <filter-form  @close-filter="toggleFilter(false)"></filter-form>
-    </modal-wrapper>
-    <modal-wrapper v-if="openSetting" >
-      <setting-form  @close-filter="toggleSetting(false)"></setting-form>
-    </modal-wrapper>
-    
+    <transition name="fade">
+      <modal-wrapper v-if="openFilter" >
+        <filter-form  @close-filter="toggleFilter(false)"></filter-form>
+      </modal-wrapper>
+      <modal-wrapper v-if="openSetting" >
+        <setting-form  @close-filter="toggleSetting(false)"></setting-form>
+      </modal-wrapper>
+    </transition>
   </main>
 </template>
 
